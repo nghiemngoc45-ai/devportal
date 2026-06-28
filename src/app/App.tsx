@@ -8,7 +8,13 @@ import {
   EyeOff,
   MessageCircle,
   Bell,
+  ArrowLeft,
+  ArrowRight,
+  Camera,
+  Check,
+  CheckCircle,
   ChevronRight,
+  Code2,
   LayoutDashboard,
   Building2,
   Smartphone,
@@ -38,6 +44,9 @@ import {
   Activity,
   AlertCircle,
   BookOpen,
+  ImageIcon,
+  Info,
+  Lightbulb,
   UserCheck,
   CreditCard,
   Calendar,
@@ -52,6 +61,7 @@ import {
   Pencil,
   Send,
   RotateCcw,
+  Store,
 } from "lucide-react";
 import {
   LineChart,
@@ -74,7 +84,7 @@ const MAN_PHOTO_1 =
 const MAN_PHOTO_2 =
   "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxtYW4lMjBhdmF0YXIlMjBwcm9maWxlJTIwcGhvdG8lMjBwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwxfHx8fDE3ODIzNTM2NDF8MA&ixlib=rb-4.1.0&q=80&w=100";
 
-type Screen = "signin" | "dashboard" | "doanhNghiep" | "chiTietDoanhNghiep" | "chiTietThanhVien" | "chiTietMiniApp" | "developer" | "miniApp" | "donViSuDung" | "chiTietDonViSuDung" | "apiManagement" | "chiTietAPI" | "apiMonitoring" | "mauMiniApp" | "trinhTaoMau" | "xemMauMiniApp" | "hoTro" | "baoCao" | "quanLyHeThong" | "dnDashboard" | "dnMiniApp";
+type Screen = "signin" | "dashboard" | "doanhNghiep" | "chiTietDoanhNghiep" | "chiTietThanhVien" | "chiTietMiniApp" | "developer" | "miniApp" | "donViSuDung" | "chiTietDonViSuDung" | "apiManagement" | "chiTietAPI" | "apiMonitoring" | "mauMiniApp" | "trinhTaoMau" | "xemMauMiniApp" | "hoTro" | "baoCao" | "quanLyHeThong" | "dnDashboard" | "dnMiniApp" | "dnCreateMiniApp" | "dnCreateMiniAppStep2" | "dnCreateMiniAppStep3";
 
 // ─── Logo ──────────────────────────────────────────────────────────────────
 function LogoIcon({ size = 32 }: { size?: number }) {
@@ -92,7 +102,7 @@ function LogoIcon({ size = 32 }: { size?: number }) {
         width={12 * s}
         height={12 * s}
         rx={2 * s}
-        fill="#E879A0"
+        fill="#00458B"
       />
       <rect
         x={10 * s}
@@ -100,7 +110,7 @@ function LogoIcon({ size = 32 }: { size?: number }) {
         width={12 * s}
         height={12 * s}
         rx={2 * s}
-        fill="#7C6FE0"
+        fill="#D1E4FF"
       />
       <rect
         x={10 * s}
@@ -108,7 +118,7 @@ function LogoIcon({ size = 32 }: { size?: number }) {
         width={12 * s}
         height={12 * s}
         rx={2 * s}
-        fill="#4FBDDF"
+        fill="#2563EB"
       />
       <rect
         x={20 * s}
@@ -116,7 +126,7 @@ function LogoIcon({ size = 32 }: { size?: number }) {
         width={12 * s}
         height={12 * s}
         rx={2 * s}
-        fill="#F59E42"
+        fill="#4CAF50"
         opacity="0.85"
       />
     </svg>
@@ -159,31 +169,30 @@ function Sidebar({
   onNavigate: (s: Screen) => void;
 }) {
   return (
-    <aside className="w-67 bg-white flex flex-col border-r border-gray-100 shrink-0">
-      <div className="flex items-center gap-2 px-4 py-4 border-b border-gray-100">
+    <aside className="w-[260px] bg-white flex flex-col border-r border-gray-100 shrink-0">
+      <div className="flex items-center gap-3 px-5 h-16 border-b border-gray-100">
         <LogoIcon size={24} />
         <div>
-          <div className="text-xs font-semibold text-gray-800 leading-tight">
-            Project Name
+          <div className="text-sm font-bold text-gray-800 leading-tight">
+            Quản trị viên
           </div>
-          <div className="text-[10px] text-gray-400">
-            Category
+          <div className="text-xs text-gray-500">
+            Enterprise Portal
           </div>
         </div>
       </div>
-      <nav className="flex-1 py-3 overflow-y-auto">
+      <nav className="flex-1 p-3 overflow-y-auto">
         {NAV_ITEMS.map(({ icon: Icon, label, screen }) => {
           const active = screen === current;
           return (
             <button
               key={label}
               onClick={() => screen && onNavigate(screen)}
-              className={`w-full flex items-center gap-2.5 px-3 py-4 text-sm font-medium transition-colors text-left rounded mx-1.5 ${
+              className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition-colors text-left rounded-lg ${
                 active
-                  ? "bg-[#094D8A] text-white"
-                  : "text-gray-600 hover:bg-gray-50"
+                  ? "bg-[#00458B] text-white font-bold"
+                  : "text-gray-600 hover:bg-gray-50 font-medium"
               }`}
-              style={{ width: "calc(100% - 12px)" }}
             >
               <Icon size={16} className="shrink-0" />
               <span className="truncate">{label}</span>
@@ -216,29 +225,28 @@ function SidebarDN({
   onNavigate: (s: Screen) => void;
 }) {
   return (
-    <aside className="w-67 bg-white flex flex-col border-r border-gray-100 shrink-0">
-      <div className="flex items-center gap-2 px-4 py-4 border-b border-gray-100">
+    <aside className="w-[260px] bg-white flex flex-col border-r border-gray-100 shrink-0">
+      <div className="flex items-center gap-3 px-5 h-16 border-b border-gray-100">
         <LogoIcon size={24} />
         <div>
-          <div className="text-xs font-semibold text-gray-800 leading-tight">
+          <div className="text-sm font-bold text-gray-800 leading-tight">
             Công ty ABC
           </div>
-          <div className="text-[10px] text-gray-400">Doanh nghiệp</div>
+          <div className="text-xs text-gray-500">Doanh nghiệp</div>
         </div>
       </div>
-      <nav className="flex-1 py-3 overflow-y-auto">
+      <nav className="flex-1 p-3 overflow-y-auto">
         {DN_NAV_ITEMS.map(({ icon: Icon, label, screen }) => {
           const active = screen === current;
           return (
             <button
               key={label}
               onClick={() => screen && onNavigate(screen)}
-              className={`w-full flex items-center gap-2.5 px-3 py-4 text-sm font-medium transition-colors text-left rounded mx-1.5 ${
+              className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition-colors text-left rounded-lg ${
                 active
-                  ? "bg-[#094D8A] text-white"
-                  : "text-gray-600 hover:bg-gray-50"
+                  ? "bg-[#00458B] text-white font-bold"
+                  : "text-gray-600 hover:bg-gray-50 font-medium"
               }`}
-              style={{ width: "calc(100% - 12px)" }}
             >
               <Icon size={16} className="shrink-0" />
               <span className="truncate">{label}</span>
@@ -253,11 +261,16 @@ function SidebarDN({
 // ─── Top Bar ───────────────────────────────────────────────────────────────
 function TopBar({ title }: { title: string }) {
   return (
-    <header className="bg-white border-b border-gray-100 px-6 py-3 flex items-center justify-between shrink-0">
-      <h1 className="text-sm font-semibold text-gray-700">
-        {title}
-      </h1>
+    <header className="bg-white border-b border-gray-100 px-8 h-16 flex items-center justify-between shrink-0">
+      <div className="flex items-center gap-2 text-sm text-gray-500">
+        <span>Trang chủ</span>
+        <ChevronRight size={14} />
+        <h1 className="text-lg font-bold text-gray-800">
+          {title}
+        </h1>
+      </div>
       <div className="flex items-center gap-3">
+        
         <button className="relative p-1.5 text-gray-500 hover:text-gray-800">
           <Bell size={18} />
           <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full" />
@@ -1510,6 +1523,7 @@ function DNMiniAppScreen({
               <p className="text-xs text-gray-400 mt-0.5">Quản lý Mini App của doanh nghiệp</p>
             </div>
             <button
+              onClick={() => onNavigate("dnCreateMiniApp")}
               className="flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold text-white transition-opacity hover:opacity-90 whitespace-nowrap"
               style={{ background: "linear-gradient(90deg,#094D8A 0%,#094D8A 100%)" }}
             >
@@ -2484,6 +2498,409 @@ function DetailHeader({ dn, activeTab, onTabChange }: {
             </button>
           );
         })}
+      </div>
+    </div>
+  );
+}
+
+function DNCreateMiniAppScreen({ onNavigate }: { onNavigate: (s: Screen) => void }) {
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("Giáo dục");
+  const [description, setDescription] = useState("");
+
+  const steps = ["Thông tin", "Chọn Template", "Cấu hình", "API", "Upload", "Hoàn tất"];
+  const tags = ["Giáo dục", "Học sinh", "Giáo viên", "Phụ huynh", "Quản lý", "Tiện ích", "Khảo sát", "Học phí"];
+
+  return (
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
+      <SidebarDN current="dnMiniApp" onNavigate={onNavigate} />
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <header className="bg-white border-b border-gray-100 px-8 h-16 flex items-center justify-between shrink-0">
+          <button
+            onClick={() => onNavigate("dnMiniApp")}
+            className="flex items-center gap-2 text-sm font-semibold text-[#00458B] hover:underline"
+          >
+            <ArrowLeft size={16} />
+            Danh sách Mini App
+          </button>
+          <div className="flex items-center gap-3">
+            <button className="relative p-1.5 text-gray-500 hover:text-gray-800">
+              <Bell size={18} />
+              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full" />
+            </button>
+            <button className="p-1.5 text-gray-500 hover:text-gray-800">
+              <Settings size={18} />
+            </button>
+            <img
+              src={MAN_PHOTO_2}
+              alt="Avatar"
+              className="w-8 h-8 rounded-full object-cover border border-gray-200"
+            />
+          </div>
+        </header>
+
+        <main className="flex-1 overflow-y-auto px-10 py-9">
+          <div className="max-w-[1000px] mx-auto w-full">
+            <div className="text-center mb-10">
+              <h1 className="text-[28px] leading-9 font-semibold text-[#00458B] tracking-normal">
+                TẠO MINI APP
+              </h1>
+              <p className="text-base text-gray-600 mt-1">
+                Xây dựng Mini App để phát hành trên Marketplace
+              </p>
+            </div>
+
+            <div className="relative flex items-center justify-between mb-12">
+              <div className="absolute left-0 right-0 top-5 h-0.5 bg-gray-200" />
+              {steps.map((step, index) => {
+                const active = index === 0;
+                return (
+                  <div key={step} className="relative z-10 flex flex-col items-center gap-2 bg-[#FCF9F8] px-2">
+                    <div
+                      className={`w-10 h-10 rounded-full border-2 flex items-center justify-center text-sm font-bold ${
+                        active
+                          ? "bg-[#00458B] border-[#00458B] text-white"
+                          : "bg-white border-gray-300 text-gray-400"
+                      }`}
+                    >
+                      {index + 1}
+                    </div>
+                    <span className={`text-xs font-semibold ${active ? "text-[#00458B]" : "text-gray-400"}`}>
+                      {step}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+              <div className="lg:col-span-2 space-y-8">
+                <section className="bg-white border border-gray-100 rounded p-6 shadow-sm">
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                    <Info size={20} className="text-[#00458B]" />
+                    Thông tin cơ bản
+                  </h2>
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-bold mb-2 text-gray-900">
+                        Tên Mini App <span className="text-red-600">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Nhập tên Mini App của bạn"
+                        className="w-full border border-gray-200 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#00458B]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-bold mb-2 text-gray-900">
+                        Danh mục <span className="text-red-600">*</span>
+                      </label>
+                      <select
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        className="w-full border border-gray-200 rounded px-3 py-2 text-sm bg-white focus:outline-none focus:border-[#00458B]"
+                      >
+                        {["Giáo dục", "Tiện ích", "Quản lý"].map((item) => (
+                          <option key={item} value={item}>{item}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-bold mb-2 text-gray-900">Mô tả</label>
+                      <textarea
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Mô tả ngắn gọn về tính năng và lợi ích của ứng dụng"
+                        rows={4}
+                        className="w-full resize-none border border-gray-200 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#00458B]"
+                      />
+                    </div>
+                  </div>
+                </section>
+
+                <section className="bg-white border border-gray-100 rounded p-6 shadow-sm">
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                    <Store size={20} className="text-[#00458B]" />
+                    Hiển thị trên Marketplace
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                      <label className="block text-sm font-bold mb-2 text-gray-900">
+                        Logo <span className="text-red-600">*</span>
+                      </label>
+                      <button className="w-32 h-32 border-2 border-dashed border-gray-300 rounded flex flex-col items-center justify-center hover:bg-gray-50 transition-colors">
+                        <Camera size={22} className="text-gray-500" />
+                        <span className="text-[10px] text-gray-400 mt-2 font-bold uppercase">Tải lên (512x512)</span>
+                      </button>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-bold mb-2 text-gray-900">Banner</label>
+                      <button className="w-full h-32 border-2 border-dashed border-gray-300 rounded flex flex-col items-center justify-center hover:bg-gray-50 transition-colors">
+                        <ImageIcon size={24} className="text-gray-500" />
+                        <span className="text-[10px] text-gray-400 mt-2 font-bold uppercase">Tải lên (1200x600)</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="mb-8">
+                    <label className="block text-sm font-bold mb-4 text-gray-900">Ảnh giới thiệu</label>
+                    <div className="grid grid-cols-4 gap-3">
+                      {Array.from({ length: 4 }).map((_, index) => (
+                        <button
+                          key={index}
+                          className="aspect-[4/3] border-2 border-dashed border-gray-300 rounded flex items-center justify-center text-xs font-bold text-gray-400 hover:bg-gray-50 hover:text-[#00458B] transition-colors"
+                        >
+                          + Ảnh
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-bold mb-4 text-gray-900">Tag ứng dụng</label>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-3">
+                      {tags.map((tag) => (
+                        <label key={tag} className="flex items-center gap-2 cursor-pointer">
+                          <input type="checkbox" className="w-4 h-4 accent-[#00458B]" />
+                          <span className="text-sm text-gray-600">{tag}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+              <aside className="lg:col-span-1">
+                <div className="sticky top-6 space-y-4">
+                  <label className="block text-[10px] font-bold text-gray-700 uppercase tracking-widest">
+                    Xem trước hiển thị
+                  </label>
+                  <div className="bg-white border border-gray-100 rounded overflow-hidden shadow-md">
+                    <div className="bg-gray-100 aspect-video flex items-center justify-center">
+                      <div className="text-center">
+                        <ImageIcon size={36} className="text-gray-400 mx-auto mb-2" />
+                        <p className="text-xs text-gray-400 font-bold">Chưa có Banner</p>
+                      </div>
+                    </div>
+                    <div className="p-5 flex gap-4">
+                      <div className="w-16 h-16 bg-gray-100 rounded-lg shrink-0 flex items-center justify-center border border-gray-200">
+                        <Smartphone size={26} className="text-gray-400" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-xl font-bold text-gray-900 truncate">
+                          {name || "Tên Mini App"}
+                        </h3>
+                        <p className="text-xs text-[#00458B] font-bold mb-2">{category}</p>
+                        <p className="text-sm text-gray-600 line-clamp-2">
+                          {description || "Mô tả Mini App của bạn sẽ xuất hiện tại đây sau khi bạn nhập nội dung..."}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="px-5 pb-5 pt-2 flex gap-2">
+                      <span className="bg-gray-100 px-2 py-0.5 rounded text-[10px] font-bold text-gray-600 uppercase">SaaS</span>
+                      <span className="bg-gray-100 px-2 py-0.5 rounded text-[10px] font-bold text-gray-600 uppercase">Free</span>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-[#D1E4FF] text-[#00458B] rounded border border-[#A9C7FF]">
+                    <div className="flex gap-3">
+                      <Lightbulb size={20} className="shrink-0" />
+                      <p className="text-sm">
+                        Mẹo: Một Mini App có banner và hình ảnh giới thiệu chất lượng sẽ có tỉ lệ chuyển đổi cao hơn 40%.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </aside>
+            </div>
+
+            <footer className="flex justify-center md:justify-end gap-4 pt-8 border-t border-gray-200">
+              <button className="px-8 py-2.5 border-2 border-[#00458B] text-[#00458B] font-bold rounded hover:bg-[#D1E4FF] transition-colors">
+                Lưu nháp
+              </button>
+              <button
+                onClick={() => onNavigate("dnCreateMiniAppStep2")}
+                className="px-10 py-2.5 bg-[#00458B] text-white font-bold rounded hover:opacity-90 transition-opacity flex items-center gap-2"
+              >
+                Tiếp tục
+                <ArrowRight size={16} />
+              </button>
+            </footer>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+function DNCreateMiniAppStep2Screen({ onNavigate }: { onNavigate: (s: Screen) => void }) {
+  const [method, setMethod] = useState<"template" | "self_build" | null>(null);
+  const steps = ["Thông tin", "Chọn Template", "Cấu hình", "Thanh toán", "Xác nhận", "Hoàn tất"];
+  const methods = [
+    {
+      key: "template" as const,
+      title: "DÙNG TEMPLATE",
+      description: "Khởi tạo Mini App từ Template của Marketplace.",
+      icon: LayoutDashboard,
+      iconBg: "#DCE0E4",
+      cta: "Chọn",
+      benefits: ["Có giao diện sẵn", "Thiết lập nhanh", "Chuẩn UI của nền tảng", "Phù hợp đa số doanh nghiệp"],
+    },
+    {
+      key: "self_build" as const,
+      title: "TỰ BUILD",
+      description: "Doanh nghiệp tự phát triển giao diện Mini App.",
+      icon: Code2,
+      iconBg: "#DCE0E4",
+      cta: "Chọn",
+      benefits: ["Toàn quyền thiết kế", "Upload Web Bundle", "Không phụ thuộc Template", "Linh hoạt"],
+    },
+  ];
+
+  return (
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
+      <SidebarDN current="dnMiniApp" onNavigate={onNavigate} />
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <header className="bg-white border-b border-gray-100 px-8 h-16 flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => onNavigate("dnCreateMiniApp")}
+              className="w-8 h-8 flex items-center justify-center rounded-full text-[#00458B] hover:bg-gray-50 transition-colors"
+            >
+              <ArrowLeft size={18} />
+            </button>
+            <h1 className="text-xl font-bold text-[#00458B]">Create Mini App</h1>
+          </div>
+          <div className="flex items-center gap-6">
+            <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+              {["Docs", "Support", "Changelog"].map((item) => (
+                <button key={item} className="text-gray-500 hover:text-[#00458B] transition-colors">
+                  {item}
+                </button>
+              ))}
+            </nav>
+            <button className="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-[#00458B] transition-colors">
+              <Bell size={18} />
+            </button>
+            <img
+              src={MAN_PHOTO_2}
+              alt="Avatar"
+              className="w-8 h-8 rounded-full object-cover border border-gray-200"
+            />
+          </div>
+        </header>
+
+        <main className="flex-1 overflow-y-auto bg-[#F6F3F2] pb-28">
+          <div className="w-full max-w-[800px] mx-auto mt-10 px-6">
+            <div className="relative flex items-center justify-between">
+              <div className="absolute left-0 right-0 top-5 h-0.5 bg-gray-300" />
+              <div className="absolute left-0 top-5 h-0.5 w-[20%] bg-[#00458B]" />
+              {steps.map((step, index) => {
+                const completed = index === 0;
+                const active = index === 1;
+                return (
+                  <div key={step} className="relative z-10 flex flex-col items-center gap-2">
+                    <div
+                      className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                        completed
+                          ? "bg-[#00458B] text-white shadow-md"
+                          : active
+                            ? "bg-[#00458B] text-white shadow-md ring-4 ring-[#D1E4FF]"
+                            : "bg-[#E5E2E1] text-gray-500 border border-gray-300"
+                      }`}
+                    >
+                      {completed ? <Check size={20} strokeWidth={3} /> : <span className="text-sm font-bold">{index + 1}</span>}
+                    </div>
+                    <span className={`text-xs font-bold ${completed || active ? "text-[#00458B]" : "text-gray-500"}`}>
+                      {step}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="w-full max-w-[900px] mx-auto mt-12 px-8 flex flex-col items-center">
+            <div className="text-center mb-10">
+              <h2 className="text-[28px] leading-9 font-semibold text-[#00458B] uppercase tracking-normal mb-2">
+                Chọn cách tạo Mini App
+              </h2>
+              <p className="text-base text-gray-600">
+                Chọn phương thức phù hợp nhất để bắt đầu xây dựng ứng dụng của bạn
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+              {methods.map(({ key, title, description, icon: Icon, iconBg, cta, benefits }) => {
+                const selected = method === key;
+                return (
+                  <button
+                    key={key}
+                    onClick={() => setMethod(key)}
+                    className={`group relative h-full bg-white border rounded-lg p-8 text-left flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-[#00458B] shadow-sm ${
+                      selected ? "border-[#00458B] ring-2 ring-[#00458B]/20" : "border-gray-300"
+                    }`}
+                  >
+                    <div
+                      className="w-14 h-14 rounded-full flex items-center justify-center text-[#00458B] mb-6 transition-transform group-hover:scale-110"
+                      style={{ background: iconBg }}
+                    >
+                      <Icon size={32} />
+                    </div>
+                    <h3 className="text-xl font-bold text-[#00458B] mb-3 uppercase">{title}</h3>
+                    <p className="text-sm text-gray-600 mb-8">{description}</p>
+                    <div className="flex-1 space-y-4 mb-10">
+                      {benefits.map((benefit) => (
+                        <div key={benefit} className="flex items-center gap-3">
+                          <CheckCircle size={20} className="text-[#00458B]" />
+                          <span className="text-gray-800 font-medium">{benefit}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div
+                      className={`w-full py-3 rounded-lg font-bold text-center transition-colors ${
+                        selected
+                          ? "bg-[#00458B] text-white"
+                          : "border-2 border-[#00458B] text-[#00458B] group-hover:bg-[#D1E4FF]"
+                      }`}
+                    >
+                      {cta}
+                    </div>
+                    {selected && (
+                      <CheckCircle
+                        size={32}
+                        className="absolute top-4 right-4 text-[#00458B]"
+                        fill="#D1E4FF"
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </main>
+
+        <footer className="h-20 bg-[#E5E2E1] flex items-center justify-between px-12 border-t border-gray-300 shrink-0">
+          <button
+            onClick={() => onNavigate("dnCreateMiniApp")}
+            className="flex items-center gap-2 px-6 py-2.5 rounded-lg border border-[#00458B] text-[#00458B] font-bold hover:bg-[#D1E4FF] transition-colors"
+          >
+            <ArrowLeft size={16} />
+            Quay lại
+          </button>
+          <button
+            disabled={!method}
+            onClick={() => {
+              if (method === "template") onNavigate("dnCreateMiniAppStep3");
+            }}
+            className="flex items-center gap-2 px-10 py-3 rounded-lg bg-[#00458B] text-white font-bold shadow-md hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed transition-opacity"
+          >
+            Tiếp tục
+            <ArrowRight size={16} />
+          </button>
+        </footer>
       </div>
     </div>
   );
@@ -4315,10 +4732,7 @@ function MiniAppScreen({ onNavigate, onViewMiniApp }: {
                 value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }}
                 className="w-full pl-8 pr-3 py-2 text-xs border border-gray-200 rounded bg-white placeholder-gray-400 focus:outline-none focus:border-[#094D8A] transition-colors" />
             </div>
-            <button className="flex items-center gap-1.5 px-3.5 py-2 rounded text-xs font-semibold text-white transition-opacity hover:opacity-90 whitespace-nowrap"
-              style={{ background: "linear-gradient(90deg,#094D8A 0%,#094D8A 100%)" }}>
-              <span className="text-base leading-none">+</span> Mini App
-            </button>
+
           </div>
 
           {/* Filters */}
@@ -9401,6 +9815,8 @@ export default function App() {
   if (screen === "signin") return <SignIn onSignIn={(target) => setScreen(target ?? "dashboard")} />;
   if (screen === "dnDashboard") return <DoanhNghiepDashboard onNavigate={setScreen} />;
   if (screen === "dnMiniApp") return <DNMiniAppScreen onNavigate={setScreen} onViewMiniApp={(appId) => handleViewMiniApp(appId, "dnMiniApp")} />;
+  if (screen === "dnCreateMiniApp") return <DNCreateMiniAppScreen onNavigate={setScreen} />;
+  if (screen === "dnCreateMiniAppStep2") return <DNCreateMiniAppStep2Screen onNavigate={setScreen} />;
   if (screen === "chiTietMiniApp" && selectedAppId !== null)
     return <ChiTietMiniApp appId={selectedAppId} prevScreen={prevScreen} onBack={() => setScreen(prevScreen)} onNavigate={setScreen}
       onViewMember={handleViewMemberFromMiniApp} />;
